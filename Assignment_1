@@ -1,0 +1,89 @@
+table : salespeople
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | peel    | london    |   12 |
+| 1002 | serres  | sanjose   |   13 |
+| 1003 | axelrod | newyork   |   10 |
+| 1004 | motika  | london    |   11 |
+| 1007 | rifkin  | barcelona |   15 |
++------+---------+-----------+------+
+
+table : orders;
++------+----------+---------+------+
+| cnum | cname    | city    | snum |
++------+----------+---------+------+
+| 2001 | hoffman  | london  | 1001 |
+| 2002 | giovaani | rome    | 1003 |
+| 2003 | lui      | sanjose | 1002 |
+| 2004 | grass    | berlin  | 1002 |
+| 2006 | clemens  | london  | 1001 |
+| 2007 | pereira  | rome    | 1004 |
+| 2008 | cisneros | sanjose | 1007 |
++------+----------+---------+------+
+
+table : orders;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4273.00 | 1990-10-05 | 2006 | 1001 |
+| 3009 | 1713.12 | 1990-10-04 | 2002 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+Question1 : Count the number of Salesperson whose name begin with ‘a’/’A’.
+Solution : mysql> select count(sname) from salespeople where sname like 'a%' or  'A%';
++--------------+
+| count(sname) |
++--------------+
+|            1 |
++--------------+
+
+Question2 : Display all the Salesperson whose all orders worth is more than Rs. 2000.
+Solution : mysql> select snum from orders where amt > 2000;
++------+
+| snum |
++------+
+| 1002 |
+| 1001 |
+| 1001 |
++------+
+
+Question3 : Count the number of Salesperson belonging to Newyork.
+Solution : mysql> select count(snum) from salespeople where city = 'newyork';
++-------------+
+| count(snum) |
++-------------+
+|           1 |
++-------------+
+
+Question4 : Display the number of Salespeople belonging to London and belonging to Paris.
+Solution : mysql> select snum from salespeople where city = 'london' and 'paris';
+Empty set, 1 warning (0.00 sec)
+
+Question5 : Display the number of orders taken by each Salesperson and their date of orders.
+Solution : mysql> select snum,onum, odate from orders;
++------+------+------------+
+| snum | onum | odate      |
++------+------+------------+
+| 1007 | 3001 | 1990-10-03 |
+| 1004 | 3002 | 1990-10-03 |
+| 1001 | 3003 | 1990-10-03 |
+| 1002 | 3005 | 1990-10-03 |
+| 1007 | 3006 | 1990-10-03 |
+| 1002 | 3007 | 1990-10-04 |
+| 1001 | 3008 | 1990-10-05 |
+| 1003 | 3009 | 1990-10-04 |
+| 1002 | 3010 | 1990-10-06 |
+| 1001 | 3011 | 1990-10-06 |
++------+------+------------+ 
+
+
+
